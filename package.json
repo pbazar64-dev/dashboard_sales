@@ -1,0 +1,16 @@
+{
+  "name": "b24-sales-funnel-dashboard",
+  "version": "1.0.0",
+  "description": "Дашборд воронки продаж для Битрикс24 на платформе Битрикс24 Вайбкод",
+  "private": true,
+  "license": "MIT",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "demo": "DEMO_MODE=1 node server.js",
+    "test": "node --test"
+  }
+}

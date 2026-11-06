@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Дашборд воронки продаж</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="app-header">
+      <div>
+        <h1>Дашборд воронки продаж</h1>
+        <p class="subtitle" id="subtitle">Загрузка…</p>
+      </div>
+      <span class="demo-badge" id="demo-badge" hidden>Демо-данные</span>
+    </header>
+
+    <form class="filters" id="filters" novalidate>
+      <label class="field">
+        <span class="field-label">Воронка</span>
+        <select id="category" name="category"></select>
+      </label>
+      <label class="field">
+        <span class="field-label">Период создания сделки</span>
+        <select id="period" name="period">
+          <option value="this-month">Текущий месяц</option>
+          <option value="last-month">Прошлый месяц</option>
+          <option value="last-30">Последние 30 дней</option>
+          <option value="this-quarter">Текущий квартал</option>
+          <option value="this-year">Текущий год</option>
+          <option value="last-365">Последние 12 месяцев</option>
+          <option value="custom">Произвольный…</option>
+        </select>
+      </label>
+      <div class="field custom-range" id="custom-range" hidden>
+        <label><span class="field-label">С</span><input type="date" id="date-from"></label>
+        <label><span class="field-label">По</span><input type="date" id="date-to"></label>
+      </div>
+      <div class="field">
+        <span class="field-label">Сделки</span>
+        <div class="segmented" role="radiogroup" aria-label="Чьи сделки показывать">
+          <label><input type="radio" name="owner" value="all" checked><span>Все</span></label>
+          <label><input type="radio" name="owner" value="mine"><span>Мои</span></label>
+        </div>
+      </div>
+      <button type="submit" class="btn" id="apply">Обновить</button>
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+    </form>
+
+    <p class="period-caption" id="period-caption"></p>
+
+    <section class="kpis" id="kpis" aria-label="Ключевые показатели">
+      <article class="kpi"><h2>Сумма открытых сделок</h2><p class="kpi-value" data-kpi="open">—</p><p class="kpi-note" data-kpi-note="open"></p></article>
+      <article class="kpi"><h2>Выиграно сделок</h2><p class="kpi-value" data-kpi="won">—</p><p class="kpi-note" data-kpi-note="won"></p></article>
+      <article class="kpi"><h2>Средний чек</h2><p class="kpi-value" data-kpi="avg">—</p><p class="kpi-note" data-kpi-note="avg">по выигранным сделкам</p></article>
+      <article class="kpi"><h2>Конверсия в успех</h2><p class="kpi-value" data-kpi="conv">—</p><p class="kpi-note" data-kpi-note="conv"></p></article>
+    </section>
+
+    <section class="card" aria-labelledby="funnel-title">
+      <div class="card-head">
+        <h2 id="funnel-title">Сводка по стадиям воронки</h2>
+        <span class="card-hint" id="funnel-hint"></span>
+      </div>
+      <div class="notice" id="summary-notice" hidden></div>
+      <div id="funnel" class="funnel" aria-live="polite"></div>
+    </section>
+
+    <section class="card" aria-labelledby="deals-title">
+      <div class="card-head">
+        <h2 id="deals-title">Последние сделки</h2>
+        <span class="card-hint">20 последних по дате создания</span>
+      </div>
+      <div class="notice" id="deals-notice" hidden></div>
+      <div class="table-wrap">
+        <table class="deals">
+          <thead>
+            <tr><th>Сделка</th><th class="num">Сумма</th><th>Стадия</th><th>Ответственный</th><th class="num">Создана</th></tr>
+          </thead>
+          <tbody id="deals-body"></tbody>
+        </table>
+      </div>
+    </section>
+    <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  </main>
+  <script src="assets/app.js"></script>
+</body>
+</html>
